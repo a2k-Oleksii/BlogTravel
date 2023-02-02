@@ -1,15 +1,19 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-
+from .forms import CityForm
 from cities.models import City
 
 
 def home(request, pk=None):
-    if pk:
-        city = City.objects.filter(id=pk).first()
-        return render(request, 'cities/detail.html', {'city': city})
+    if request.method == "POST":
+        form = CityForm(request.POST or None)
+        if form.is_valid():
+            name = form.cleaned_data.get("name")
+            city = City(name=name)
+            city.save()
+    form = CityForm()
     cities = City.objects.all()
-    context = {"cities_list": cities, }
+    context = {"cities_list": cities, "form": form}
     return render(request, 'cities/home.html', context)
 
 
