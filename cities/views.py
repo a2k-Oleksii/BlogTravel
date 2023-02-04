@@ -8,9 +8,7 @@ def home(request, pk=None):
     if request.method == "POST":
         form = CityForm(request.POST or None)
         if form.is_valid():
-            name = form.cleaned_data.get("name")
-            city = City(name=name)
-            city.save()
+            form.save()
     form = CityForm()
     cities = City.objects.all()
     context = {"cities_list": cities, "form": form}
