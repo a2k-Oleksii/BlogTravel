@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.contrib.messages.views import SuccessMessageMixin
 from .forms import CityForm
-from cities.models import City
+from .models import City
 
 
 def home(request, pk=None):
@@ -30,11 +31,12 @@ class CityDetailView(DetailView):
     template_name = "cities/detail.html"
 
 
-class CityCreateView(CreateView):
+class CityCreateView(SuccessMessageMixin, CreateView):
     model = City
     form_class = CityForm
     template_name = 'cities/create.html'
     success_url = reverse_lazy('cities:home')
+    success_message = "Місто додано!"
 
 
 class CityUpdateView(UpdateView):
