@@ -1,31 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Перелік міст{% endblock %}
+{% block title %}Перелік потягів{% endblock %}
 
 {% block content %}
-<h1 class="display-4 text-center my-4">Перелік міст</h1>
+<h1 class="display-4 text-center my-4">Перелік потягів</h1>
 <div class="row">
     <div class="col-md-6 mx-auto">
         <table class="table table-striped">
             <tbody>
-            {% for city in cities_list %}
+            {% for train in trains_list %}
             <tr>
                 <td>
-                    <a href="{% url 'cities:detail' pk=city.pk %}">{{city.name}}</a>
-                </td>
-                <td>
-                    <a href="{% url 'cities:update' pk=city.pk%}">
-                        <button type="button" class="btn btn-primary btn-sn">Редагувати</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="{% url 'cities:delete' pk=city.pk%}">
-                        <button type="button" class="btn btn-warning btn-sn">Видалити</button>
-                    </a>
+                    <a>{{train.name}}</a>
                 </td>
             </tr>
             {% endfor %}
-            </tbody>
+            </tbody>git
         </table>
     </div>
 </div>
@@ -73,6 +63,5 @@
         </a>
     </div>
 </div>
-
 
 {% endblock %}
